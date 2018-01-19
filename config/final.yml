@@ -1,1 +1,6 @@
-name: ope_bosh_alerts
+---
+blobstore:
+  provider: local
+  options:
+    blobstore_path: /tmp/bosh-blobs
+final_name: ope_bosh_alerts
