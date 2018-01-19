@@ -21,4 +21,3 @@ ALERT BOSHJobExtendedUnhealthy
     summary = "BOSH Job `{{$labels.environment}}/{{$labels.bosh_name}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}` has been unhealthy for a long time",
     description = "BOSH job `{{$labels.environment}}/{{$labels.bosh_name}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}` has been reported unhealthy for more than <%= p('ope_bosh_alerts.job_extended_unhealthy.evaluation_time') %>",
   }
-`
