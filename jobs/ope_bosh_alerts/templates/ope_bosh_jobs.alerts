@@ -1,4 +1,4 @@
-ALERT BOSHJobUnhealthy
+ALERT BOSHJobUnhealthyDetailed
   IF max(bosh_job_healthy{bosh_job_name!~"^compilation.*",bosh_deployment!="bosh-health-check"}) by(environment, bosh_name, bosh_deployment, bosh_job_name, bosh_job_index) < 1
   FOR <%= p('ope_bosh_alerts.job_unhealthy.evaluation_time') %>
   LABELS {
@@ -6,11 +6,11 @@ ALERT BOSHJobUnhealthy
     severity = "warning",
   }
   ANNOTATIONS {
-    summary = "BOSH Job `{{$labels.environment}}/{{$labels.bosh_name}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}` is unhealthy",
-    description = "BOSH Job `{{$labels.environment}}/{{$labels.bosh_name}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}` is being reported unhealthy",
+    summary = "BOSH Job `{{$labels.environment}}/{{$labels.bosh_name}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}/{{$labels.bosh_job_az}}/{{$labels.bosh_job_ip}}` is unhealthy",
+    description = "BOSH Job `{{$labels.environment}}/{{$labels.bosh_name}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}/{{$labels.bosh_job_az}}/{{$labels.bosh_job_ip}}` is being reported unhealthy",
   }
 
-ALERT BOSHJobExtendedUnhealthy
+ALERT BOSHJobExtendedUnhealthyDetailed
   IF max(bosh_job_healthy{bosh_job_name!~"^compilation.*",bosh_deployment!="bosh-health-check"}) by(environment, bosh_name, bosh_deployment, bosh_job_name, bosh_job_index) < 1
   FOR <%= p('ope_bosh_alerts.job_extended_unhealthy.evaluation_time') %>
   LABELS {
@@ -18,6 +18,7 @@ ALERT BOSHJobExtendedUnhealthy
     severity = "critical",
   }
   ANNOTATIONS {
-    summary = "BOSH Job `{{$labels.environment}}/{{$labels.bosh_name}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}` has been unhealthy for a long time",
-    description = "BOSH job `{{$labels.environment}}/{{$labels.bosh_name}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}` has been reported unhealthy for more than <%= p('ope_bosh_alerts.job_extended_unhealthy.evaluation_time') %>",
+    summary = "BOSH Job `{{$labels.environment}}/{{$labels.bosh_name}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}/{{$labels.bosh_job_az}}/{{$labels.bosh_job_ip}}` has been unhealthy for a long time",
+    description = "BOSH job `{{$labels.environment}}/{{$labels.bosh_name}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}/{{$labels.bosh_job_az}}/{{$labels.bosh_job_ip}}` has been reported unhealthy for more than <%= p('ope_bosh_alerts.job_extended_unhealthy.evaluation_time') %>",
   }
+
