@@ -22,3 +22,15 @@ ALERT BOSHJobExtendedUnhealthyDetailed
     description = "BOSH job `{{$labels.environment}}/{{$labels.bosh_name}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}/{{$labels.bosh_job_az}}/{{$labels.bosh_job_ip}}` has been reported unhealthy for more than <%= p('ope_bosh_alerts.job_extended_unhealthy.evaluation_time') %>",
   }
 
+ALERT BOSH_System_VM_Down
+  IF max(bosh_job_healthy{bosh_job_name!~"^compilation.*",bosh_deployment!="bosh-health-check"}) by(environment, bosh_name, bosh_deployment, bosh_job_name, bosh_job_index) < 1
+  FOR 15m
+  LABELS {
+    service = "bosh-job-vm",
+    severity = "critical",
+  }
+  ANNOTATIONS {
+    summary = "BOSH System VM `{{$labels.environment}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}/{{$labels.bosh_job_ip}}` has been down for more than 15 mins",
+    description = "BOSH System VM `{{$labels.environment}}/{{$labels.bosh_deployment}}/{{$labels.bosh_job_name}}/{{$labels.bosh_job_index}}/{{$labels.bosh_job_ip}}` has been down for more than 15 mins",
+  }
+
