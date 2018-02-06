@@ -1,0 +1,9 @@
+name: ope_alerts
+version: "3"
+commit_hash: "0385542"
+uncommitted_changes: false
+jobs:
+- name: ope_bosh_alerts
+  version: 70d170a3b0a7e3a60b73586791f1cbc2587752bc
+  fingerprint: 70d170a3b0a7e3a60b73586791f1cbc2587752bc
+  sha1: 5c713636ca81e709d71b3df47bcdb047b3998805
